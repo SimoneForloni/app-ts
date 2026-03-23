@@ -4,7 +4,7 @@ import * as schema from './schemes/schema.ts'
 
 // Usa le credenziali che abbiamo messo nel docker-compose.yml
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: "postgres://user:password@db:5432/nest_db",
 });
 
 export const db = drizzle(pool, {schema});
