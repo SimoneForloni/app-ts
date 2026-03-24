@@ -4,14 +4,34 @@ import { env } from 'hono/adapter'
 import { db } from '../db/db';
 import { users } from '../db/schemes/schema';
 import bcrypt from 'bcryptjs';
-import { eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm'
+import * as crypto from 'node:crypto'
+
+const PEPPER = process.env.MY_SECRET_PEPPER; 
+const ROUNDS = 14;
+
+function getPreHash(password: string) {
+	return crypto
+			.createHash('sha256')
+			.update(password + PEPPER)
+			.digest('hex');
+}
+
+// --- FASE DI REGISTRAZIONE ---
+async function registerUser(passwordChiaro: string) {
+	const preHash = getPreHash(passwordChiaro);
+	const hashedPassword = await bcrypt.hash(preHash, ROUNDS);
+	
+	// Salva 'hashedPassword' nel database
+	return hashedPassword;
+}
 
 export const register = async (c: Context) => {
 	const body = await c.req.json();
 	const { username, email, password } = body;
 
 	try {
-		const hashedPassword = await bcrypt.hash(password, 10);
+		const hashedPassword = await registerUser(password);
 
 		await db.insert(users).values({
 			username,
