@@ -16,6 +16,7 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       PORT: ${PORT}
       JWT_SECRET: ${JWT_SECRET}
+      MY_SECRET_PEPPER: ${MY_SECRET_PEPPER}
     ports:
       - "${PORT}:${PORT}"
     volumes:
