@@ -86,9 +86,8 @@ const createProjectRoute = createRoute({
     body: {
       content: { 'application/json': { 
         schema: z.object({
-          name: z.string().min(2).openapi({ example: 'Mio Social App' }),
+          title: z.string().min(2).openapi({ example: 'Mio Social App' }),
           description: z.string().optional().openapi({ example: 'Un mix tra IG e GitHub' }),
-          repositoryUrl: z.string().url().optional().openapi({ example: 'https://github.com/user/repo' }),
         }) 
       } },
     },
