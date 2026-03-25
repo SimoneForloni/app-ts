@@ -8,6 +8,13 @@
       "when": 1774214846830,
       "tag": "0000_yummy_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774434974857,
+      "tag": "0001_absent_the_renegades",
+      "breakpoints": true
     }
   ]
 }

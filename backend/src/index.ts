@@ -5,6 +5,7 @@ import { serve } from '@hono/node-server'
 import { logger } from 'hono/logger'
 import { cors } from 'hono/cors'
 import * as auth from './controllers/authController'
+import * as proj from './controllers/projectController'
 
 type Variables = {
   jwtPayload: {
@@ -43,6 +44,7 @@ app.get('/api/protected/me', (c) => {
 
 app.post('/api/auth/register', auth.register)
 app.post('/api/auth/login', auth.login)
+app.post('/api/protected/projects', proj.createProject)
 
 console.log('Server in ascolto sulla porta 3000...')
 

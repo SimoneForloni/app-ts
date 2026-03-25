@@ -38,7 +38,7 @@ export const projects = table(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     ownerId: t.integer('owner_id').references(() => users.id, { onDelete: 'cascade' }),
     title: t.text().notNull(),
-    description: t.text().notNull(),
+    description: t.text(),
     objective: t.text(),
     imageUrl: t.text('image_url'),
     // Inizializzato come array vuoto per evitare problemi con l'indice GIN
@@ -50,7 +50,7 @@ export const projects = table(
   (table) => [
     t.index("status_idx").on(table.status),
     // Indice GIN per ottimizzare le ricerche all'interno dell'array delle lingue
-    t.index("languages_gin_idx").using("gin", table.languages.asc()),
+    t.index("languages_gin_idx").using("gin", table.languages),
   ]
 );
 
