@@ -69,7 +69,7 @@ export const login = async (c: Context) => {
 			username: user.username,
 			iat: now,
 			nbf: now,
-			exp: now + (60 * 60 * 24)
+			exp: now + (60 * 60 * 24 * 30)
 		}	
 
 		const variables = env<{ JWT_SECRET: string }>(c)

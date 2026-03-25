@@ -8,10 +8,13 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.19.11",
+    "@hono/swagger-ui": "^0.6.1",
+    "@hono/zod-openapi": "^1.2.3",
     "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.45.1",
     "hono": "^4.12.9",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
