@@ -62,7 +62,6 @@ export const projectMembers = table(
     joinedAt: t.timestamp("joined_at").defaultNow().notNull(),
   },
   (table) => [
-    // Vincolo UNIQUE per impedire doppie iscrizioni dello stesso utente allo stesso progetto
     unique("project_members_user_project_unique").on(table.ownerId, table.projectId),
   ]
 );
