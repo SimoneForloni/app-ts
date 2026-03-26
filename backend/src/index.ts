@@ -98,6 +98,23 @@ const createProjectRoute = createRoute({
   },
 })
 
+const deleteProjectRoute = createRoute({
+  method: 'delete',
+  path: '/api/protected/projects/{id}', // Nota le parentesi graffe per OpenAPI
+  summary: 'Elimina un progetto (Solo se sei l\'autore)',
+  security: [{ BearerAuth: [] }],
+  request: {
+    params: z.object({
+      id: z.string().openapi({ example: '1' }), // I parametri URL sono sempre stringhe inizialmente
+    }),
+  },
+  responses: {
+    200: { description: 'Progetto eliminato' },
+    404: { description: 'Progetto non trovato' },
+    401: { description: 'Non autorizzato' },
+  },
+})
+
 // 4. Schema Profilo "Me" (Protetta)
 const meRoute = createRoute({
   method: 'get',
@@ -119,6 +136,7 @@ app.get('/', (c) => c.json({ message: 'Hono Backend is flying! 🚀' }))
 app.openapi(registerRoute, auth.register)
 app.openapi(loginRoute, auth.login)
 app.openapi(createProjectRoute, proj.createProject)
+app.openapi(deleteProjectRoute, proj.deleteProject)
 app.openapi(meRoute, (c) => {
   const payload = c.get('jwtPayload')
   return c.json({
